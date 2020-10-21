@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>首页</title>
+{% load static %}
+<!-- for-mobile-apps -->
+<link rel="icon" href="{% static '/favicon.ico'%}" mce_href="{% static '/favicon.ico'%}" type="image/x-icon">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+
+<!-- //for-mobile-apps -->
+<link href={% static '/css/bootstrap.css'%} rel="stylesheet" type="text/css" media="all" />
+<link href={% static '/css/style.css'%} rel="stylesheet" type="text/css" media="all" />
+
+<link href={% static '/css/medile.css'%} rel='stylesheet' type='text/css' />
+
+<link href={% static '/css/single.css'%} rel='stylesheet' type='text/css' />
+
+<link rel="stylesheet" href={% static '/css/contactstyle.css'%} type="text/css" media="all" />
+
+<link rel="stylesheet" href={% static '/css/faqstyle.css'%} type="text/css" media="all" />
+
+<link rel="stylesheet" href={% static '/css/font-awesome.min.css'%} />
+
+<link rel="stylesheet" href={% static '/css/news-css/news.css'%} type="text/css" media="all" />
+
+<link rel="stylesheet" href={% static '/css/list.css'%} type="text/css" media="all" />
+
+<script type="text/javascript" src={% static '/js/jquery-2.1.4.min.js'%}></script>
+
+<script type="text/javascript" src={% static '/js/move-top.js'%}></script>
+<script type="text/javascript" src={% static '/js/easing.js'%}></script>
+
+<link href={% static '/css/owl.carousel.css'%} rel="stylesheet" type="text/css" media="all">
+<script src={% static '/js/owl.carousel.js'%}></script>
+
+<link rel="stylesheet" href={% static '/css/jquery.typeahead.css'%}>
+<script src={% static '/js/jquery.typeahead.js'%}></script>
+<script type="application/x-javascript"> 
+	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+	function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+</head>
+	
+<body>
+	<div style="height: 100px;">
+
+	</div>
+	
+	<div style="width: 100%; max-width: 800px; margin: 0 auto;">
+		<div class="js-result-container"></div>
+		<div class="typeahead__container">
+			<div class="typeahead__field">
+				<span class="typeahead__query">
+					<input id="search_content" class="js-typeahead"
+							name="q"
+							type="search"
+							autofocus
+							autocomplete="off">
+				</span>
+				<span class="typeahead__button">
+					<button id="fire" type="submit">
+						<span class="typeahead__search-icon"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+
+	
+		<script>
+	
+		typeof $.typeahead === 'function' && $.typeahead({
+			input: ".js-typeahead",
+			minLength: 1,
+			maxItem: 15,
+			order: "asc",
+			hint: true,
+			group: {
+				template: "{{group}} beers!"
+			},
+			maxItemPerGroup: 5,
+			backdrop: {
+				"background-color": "#fff"
+			},
+			href: "/beers/{{group}}/{{display}}/",
+			dropdownFilter: "",
+			emptyTemplate: 'No result for "{{query}}"',
+			source: {
+				'电影名': {
+					data: {% autoescape off %}{{ movie_all_name_list }}{% endautoescape %}
+				},
+			},
+			callback: {
+				onClickAfter: function (node, a, item, event) {
+					var b=item.display;
+					var url="{% url 'play_page' 9999999 %}";
+					var url=url.replace(/9999999/,b);
+					window.location.href=url;
+					event.preventDefault();
+				}
+			},
+			debug: true
+		});
+	
+		</script>
+	
+	</div>
+	<script>
+		$('.toggle').click(function(){
+		  // Switches the Icon
+		  $(this).children('i').toggleClass('fa-pencil');
+		  // Switches the forms  
+		  $('.form').animate({
+			height: "toggle",
+			'padding-top': 'toggle',
+			'padding-bottom': 'toggle',
+			opacity: "toggle"
+		  }, "slow");
+		});
+	</script>
+<!-- //bootstrap-pop-up -->
+<!-- nav -->
+	<div class="movies_nav">
+		<div class="container">
+
+		</div>
+	</div>
+<!-- //nav -->
+<div class="general_social_icons">
+	<nav class="social">
+		<ul>			  
+		</ul>
+  </nav>
+</div>
+<!-- /w3l-medile-movies-grids -->
+	<div class="general-agileits-w3l">
+		<div class="w3l-medile-movies-grids">
+
+				<!-- /movie-browse-agile -->
+				
+				      <div class="movie-browse-agile">
+					     <!--/browse-agile-w3ls -->
+						<div class="browse-agile-w3ls general-w3ls">
+								<div class="tittle-head">
+									<h4 class="latest-text">所有电影</h4>
+									<div class="container">
+										<div class="agileits-single-top" style="height: 50px;">
+
+										</div>
+									</div>
+								</div>
+								     <div class="container">
+							<div class="browse-inner">
+								{% for movie in movie_list %}
+									<div class="col-md-2 w3l-movie-gride-agile">
+										<a href={% url 'play_page' movie.id %} class="hvr-shutter-out-horizontal"><img src={{ movie.movie_pic }} style="width: 182px;" title="album-name" alt=" " />
+										<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+										</a>
+										<div class="mid-1">
+											<div class="w3l-movie-text">
+												<h6><a href={% url 'play_page' movie.id %}>{{ movie.movie_name }}</a></h6>							
+											</div>
+											<div class="mid-2">
+												<p>{{ movie.year }}</p>
+												<div class="block-stars">
+													<ul class="w3l-ratings">
+														<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+													</ul>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+									{% ifequal movie.year t1 %}
+										<div class="ribben two">
+											<p>NEW</p>
+										</div>
+									{% endifequal %}	
+								</div>
+								{% endfor %}
+							   
+								
+
+								<div class="clearfix"> </div>
+								</div>
+								</div>
+						</div>
+				<!--//browse-agile-w3ls -->
+						<div class="blog-pagenat-wthree">
+							<ul>
+								{% ifequal is_exist 1 %}
+									<span>
+										{% if movie_list.has_previous %}
+											<li><a class="frist" href="?a={{ prepage }}">Prev</a></li>
+										{% else %}
+											<li class="disabled"><a>prev</a></li>
+										{% endif %}
+										<span>
+											{% for page_num in page_num_list %}
+												{% ifequal page_num cur_page %}
+													<li><a href="?a={{ page_num }}" style="color: rgb(243, 243, 8);">{{ page_num }}</a></li>
+												{% else %}
+													<li><a href="?a={{ page_num }}">{{ page_num }}</a></li>
+												{% endifequal %}
+											{% endfor %}
+										</span>
+										{% if movie_list.has_next %}
+											<li><a class="last" href="?a={{ nextpage }}">Next</a></li>
+										{% else %}
+											<li class="disabled"><a>next</a></li>
+										{% endif %}
+									</span>
+								{% endifequal %}
+						
+								{% ifequal is_exist 0 %}
+									<p>N0 DATA!</p>
+								{% endifequal %}
+								
+							</ul>
+						</div>
+					</div>
+				    <!-- //movie-browse-agile -->
+				   <!--body wrapper start-->
+				<!--body wrapper start-->
+			<div class="review-slider">
+				<h4 class="latest-text">热门电影</h4>
+				<div class="container">
+					<div class="w3_agile_banner_bottom_grid">
+						<div id="owl-demo" class="owl-carousel owl-theme">
+							{% for movie in t_movie_list %}
+								<div class="item">
+									<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+										<a href={% url 'play_page' movie.id %} class="hvr-shutter-out-horizontal"><img src={{ movie.movie_pic }} style="width: 182px;" title="album-name" class="img-responsive" alt=" " />
+											<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+										</a>
+										<div class="mid-1 agileits_w3layouts_mid_1_home">
+											<div class="w3l-movie-text">
+												<h6><a href={% url 'play_page' movie.id %}>{{ movie.movie_name }}</a></h6>							
+											</div>
+											<div class="mid-2 agile_mid_2_home">
+												<p>{{ movie.year }}</p>
+												<div class="block-stars">
+													<ul class="w3l-ratings">
+														<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+														<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+													</ul>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+										{% ifequal movie.year t1 %}
+											<div class="ribben">
+												<p>NEW</p>
+											</div>
+										{% endifequal %}
+									</div>
+								</div>
+							{% endfor %}
+							
+						</div>
+					</div>
+				</div>	
+			</div>	
+		</div>
+	</div>
+<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="w3ls_footer_grid">
+				<div class="col-md-6 w3ls_footer_grid_left">
+					<div class="w3ls_footer_grid_left1" style="height: 200px;">
+
+					</div>
+				</div>
+
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-5 w3ls_footer_grid1_left">
+				<p>Copyright &copy; 2099.Company name All rights reserved.</p>
+			</div>
+			<div class="col-md-7 w3ls_footer_grid1_right">
+				<ul>
+					<li style="color: bisque;">
+						友情链接
+					</li>
+					<li>
+						<a href="javascript:void(0)">FBI</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">CIA</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">NASA</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">SCP</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">MTV</a>
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix" style="height: 40px;"> </div>
+		</div>
+	</div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+
+<script src={% static '/js/bootstrap.min.js'%}></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+	);
+	/*
+		var defaults = {
+		containerID: 'toTop', // fading element id
+		containerHoverID: 'toTopHover', // fading element hover id
+		scrollSpeed: 1200,
+		easingType: 'linear' 
+		};
+	*/
+						
+	$().UItoTop({ easingType: 'easeOutQuart' });
+
+	$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+		$("#owl-demo").owlCarousel({
+	 
+		  autoPlay: 3000, //Set AutoPlay to 3 seconds
+	 
+		  items : 5,
+		  itemsDesktop : [640,5],
+		  itemsDesktopSmall : [414,4]
+	 
+		});
+
+		$("#fire").click(function(event){	
+			console.log($("#search_content").val());
+			var a=$("#search_content").val();
+
+			var url="{% url 'search' 9999999 %}";
+			var url=url.replace(/9999999/,a);
+			window.location.href=url;
+		});
+		
+		
+});
+</script>
+</body>
+</html>

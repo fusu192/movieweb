@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ cur_movie.movie_name }}</title>
+    {% load static %}
+    <link rel="icon" href="{% static '/favicon.ico'%}" mce_href="{% static '/favicon.ico'%}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+
+<link href={% static '/css/bootstrap.css'%} rel="stylesheet" type="text/css" media="all" />
+<link href={% static '/css/style.css'%} rel="stylesheet" type="text/css" media="all" />
+<link href={% static '/css/medile.css'%} rel='stylesheet' type='text/css' />
+<link href={% static '/css/single.css'%} rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href={% static '/css/contactstyle.css'%} type="text/css" media="all" />
+<link rel="stylesheet" href={% static '/css/faqstyle.css'%} type="text/css" media="all" />
+<!-- news-css -->
+<link rel="stylesheet" href={% static '/css/news.css'%} type="text/css" media="all" />
+<link rel="stylesheet" href={% static '/css/list.css'%} type="text/css" media="all" />
+<link rel="stylesheet" href={% static '/css/font-awesome.min.css'%} />
+<script type="text/javascript" src={% static '/js/jquery-1.11.0.min.js'%}></script>
+<script type="text/javascript" src={% static '/js/move-top.js'%}></script>
+<script type="text/javascript" src={% static '/js/easing.js'%}></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+<link href={% static '/css/owl.carousel.css'%} rel="stylesheet" type="text/css" media="all">
+<script src={% static '/js/owl.carousel.js'%}></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css">
+    <link rel="stylesheet" href={% static '/css/demo.css'%}>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dashjs/dist/dash.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pearplayer"></script>
+    <script src={% static '/js/DPlayer.min.js'%}></script>
+<script>
+	$(document).ready(function() { 
+		$("#owl-demo").owlCarousel({
+	 
+		  autoPlay: 3000, //Set AutoPlay to 3 seconds
+	 
+		  items : 5,
+		  itemsDesktop : [640,5],
+		  itemsDesktopSmall : [414,4]
+	 
+		});
+	 
+	}); 
+</script> 
+
+<script>
+	$("document").ready(function() {
+		console.log("开始播放");
+	});
+</script>
+<style>
+	label {
+		display: inline;
+	}
+</style>
+
+</head>
+	
+<body>
+<div style="height: 70px;"></div>
+	<script>
+		$('.toggle').click(function(){
+		  // Switches the Icon
+		  $(this).children('i').toggleClass('fa-pencil');
+		  // Switches the forms  
+		  $('.form').animate({
+			height: "toggle",
+			'padding-top': 'toggle',
+			'padding-bottom': 'toggle',
+			opacity: "toggle"
+		  }, "slow");
+		});
+	</script>
+
+
+<!-- //nav -->
+<div class="general_social_icons">
+	<nav class="social">
+		<ul>				  
+		</ul>
+  </nav>
+</div>
+<!-- single -->
+<div class="single-page-agile-main">
+<div class="container">
+		<!-- /w3l-medile-movies-grids -->
+			<div class="agileits-single-top">
+				<ol class="breadcrumb">
+				  <li><a href="{% url 'index' %}">首页</a></li>
+				  <li class="active">{{ cur_movie.movie_name }}</li>
+				</ol>
+			</div>
+			<div class="single-page-agile-info">
+                   <!-- /movie-browse-agile -->
+                           <div class="show-top-grids-w3lagile">
+				<div class="col-sm-8 single-left">
+					<div class="song">
+						<div class="song-info">
+							<h3></h3>	
+						</div>
+						<div class="video-grid-single-page-agileits">
+                            <div data-video="dLmKio67pVQ" id="video"> 
+                                <div class="example">
+                                    <div id="dplayer1"></div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="song-grid-right">
+						<div class="share">
+							<h5></h5>
+							<div class="single-agile-shar-buttons">
+							<ul>
+								
+							</ul>
+						</div>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+
+					<div class="all-comments">
+						<br><br>
+						<br>
+						{% autoescape off %}
+							{{ cur_movie.desc }}
+						{% endautoescape %}
+						
+					</div>
+				</div>
+				<div class="col-md-4 single-right">
+					<h3>推荐</h3>
+					<div class="single-grid-right">
+						{% for movie in t_movie_list %}
+						<div class="single-right-grids">
+							<div class="col-md-4 single-right-grid-left">
+								<a href="{% url 'play_page' movie.id %}"><img src="{{ movie.movie_pic }}" alt=""/></a>
+							</div>
+							<div class="col-md-8 single-right-grid-right">
+								<a href="{% url 'play_page' movie.id %}" class="title">{{ movie.movie_name }}</a>
+								<p class="author"><a href="#" class="author">{{ movie.year }}</a></p>
+								<p class="views">{{ movie.view_num }} 次观看</p>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						<hr>
+					{% endfor %}
+					</div>
+				</div>
+				
+
+				
+				<div class="clearfix"> </div>
+			</div>
+				<!-- //movie-browse-agile -->
+				<!--body wrapper start-->
+			<div class="w3_agile_banner_bottom_grid">
+				<div id="owl-demo" class="owl-carousel owl-theme">
+					{% for movie in v_movie_list %}
+						<div class="item">
+							<div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+								<a href="{% url 'play_page' movie.id %}" class="hvr-shutter-out-horizontal"><img src="{{ movie.movie_pic }}" style="width: 182px;" title="album-name" class="img-responsive" alt=" " />
+									<div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+								</a>
+								<div class="mid-1 agileits_w3layouts_mid_1_home">
+									<div class="w3l-movie-text">
+										<h6><a href={% url 'play_page' movie.id %}>{{ movie.movie_name }}</a></h6>							
+									</div>
+									<div class="mid-2 agile_mid_2_home">
+										<p>{{ movie.year }}</p>
+										<div class="block-stars">
+											<ul class="w3l-ratings">
+												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+												<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+												<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+											</ul>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								{% ifequal movie.year t1 %}
+									<div class="ribben">
+										<p>NEW</p>
+									</div>
+								{% endifequal %}
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+				</div>
+			</div>
+		<!--body wrapper end-->
+						
+							 
+				</div>
+				<!-- //w3l-latest-movies-grids -->
+			</div>	
+		</div>
+	<!-- //w3l-medile-movies-grids -->
+	
+<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="w3ls_footer_grid">
+				<div class="col-md-6 w3ls_footer_grid_left">
+					<div class="w3ls_footer_grid_left1" style="height: 200px;">
+
+					</div>
+				</div>
+
+				<div class="clearfix"> </div>
+			</div>
+			<div class="col-md-5 w3ls_footer_grid1_left">
+				<p>Copyright &copy; 2099.Company name All rights reserved.</p>
+			</div>
+			<div class="col-md-7 w3ls_footer_grid1_right">
+				<ul>
+					<li style="color: bisque;">
+						友情链接
+					</li>
+					<li>
+						<a href="javascript:void(0)">FBI</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">CIA</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">NASA</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">SCP</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)">MTV</a>
+					</li>
+				</ul>
+			</div>
+			<div class="clearfix" style="height: 40px;"> </div>
+		</div>
+	</div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+
+<script src={% static '/js/bootstrap.min.js'%}></script>
+<script>
+    // dp1
+    window.dp1 = new DPlayer({
+        container: document.getElementById('dplayer1'),
+        preload: 'none',
+        screenshot: true,
+        video: {
+            //视频地址
+            url: '{{ cur_movie.movie_url }}',
+            //封面图
+            pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
+            //缩略图
+            thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg'
+        },
+        //https://api.prprpr.me/dplayer/v3/
+        //{"id":"9E2E3368B56CDBB4","author":"DIYgod","time":60.910431,"text":"hahahahha","color":16777215,"type":0}
+        
+        /*
+        https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json
+        {
+            "code":0,
+            "data":[
+                [230.523,0,16777215,"618c713c","键盘妹子挺好看？"],
+                [25.837,0,16777215,"6b2884ac","Goose house炒鸡棒！！！  银之匙种草他们组合"],
+                [235.243,1,16707842,"929815d3","刚才说比其他翻唱都好听的你是认真的么，这。就是原唱"]
+            ]
+        }
+        */
+        danmaku: {
+            id: '{{cur_movie.id}}',
+            api: "{% url 'add_Barrage' %}",
+            addition: ["{% static cur_movie.json_file %}"]
+        }
+    });
+
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+	var client_ip=returnCitySN["cip"];
+	console.log(client_ip);
+});
+</script>
+<!-- //Bootstrap Core JavaScript -->
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+</body>
+</html>
+

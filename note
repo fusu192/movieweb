@@ -1,0 +1,13 @@
+
+
+#更新json文件名称
+UPDATE play_page_movielist set json_file='json_file'||CAST(id AS TEXT)||'.json';
+#多条件过滤
+#filter(Q(notice_to_group__contains='所有用户')|Q(notice_to_group__contains='段级用户'))
+
+
+#定时任务
+#移动数据库中的弹幕到json文件中
+每5分钟执行一次：
+*/5 * * * * /usr/local/bin/python3.7 /root/cocoa/mv_barrage.py
+
