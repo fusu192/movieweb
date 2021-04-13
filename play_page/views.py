@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.shortcuts import render_to_response
 from django.http import HttpResponse
 import json
 import simplejson
@@ -91,7 +90,7 @@ def index(request):
 	else:
 		is_exist=0
 
-	return render_to_response('index.html',{"movie_all_name_list":movie_all_name_list,"cur_page":int(page),"movie_list":booklist,"t1":t1,"t_movie_list":v_movie_list,'prepage':prepage,'nextpage':nextpage,'is_exist':is_exist,'page_num_list':page_num_list})
+	return render(request,'index.html',{"movie_all_name_list":movie_all_name_list,"cur_page":int(page),"movie_list":booklist,"t1":t1,"t_movie_list":v_movie_list,'prepage':prepage,'nextpage':nextpage,'is_exist':is_exist,'page_num_list':page_num_list})
 
 #视频播放页
 def play_page(request,movie_id):
@@ -156,7 +155,7 @@ def play_page(request,movie_id):
 	cur_movie.view_num=cur_movie.view_num+1
 	cur_movie.save()
 
-	return render_to_response('play_page.html',{"t_movie_list":t_movie_list,"v_movie_list":v_movie_list,"cur_movie":cur_movie})
+	return render(request,'play_page.html',{"t_movie_list":t_movie_list,"v_movie_list":v_movie_list,"cur_movie":cur_movie})
 
 
 #弹幕地址tmp
@@ -283,7 +282,7 @@ def search(request,search_content):
 	else:
 		is_exist=0
 
-	return render_to_response('index.html',{"movie_all_name_list":movie_all_name_list,"cur_page":int(page),"movie_list":booklist,"t1":t1,"t_movie_list":v_movie_list,'prepage':prepage,'nextpage':nextpage,'is_exist':is_exist,'page_num_list':page_num_list})
+	return render(request,'index.html',{"movie_all_name_list":movie_all_name_list,"cur_page":int(page),"movie_list":booklist,"t1":t1,"t_movie_list":v_movie_list,'prepage':prepage,'nextpage':nextpage,'is_exist':is_exist,'page_num_list':page_num_list})
 
 
 
